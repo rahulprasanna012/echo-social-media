@@ -1,8 +1,9 @@
 import type { Sidelist } from '@/types/sidebar'
 import {v4 as uuidv4} from "uuid"
-import React from 'react'
+
 import SlideList from './SlideList'
 import ProfileIcon from '../ProfileIcon'
+import { useState } from 'react'
 
 const Sidebar = () => {
   const SIDEITEMS:Sidelist[]=[
@@ -42,11 +43,16 @@ const Sidebar = () => {
 
   ]
 
+
+  const [isActive, setActive]=useState<boolean>(false)
+
+
+
   return (
-    <section className='bg-white/90  h-full w-72 flex flex-col justify-evenly'>
+    <section className='  bg-purple-50/70  h-full w-72 flex flex-col justify-evenly'>
 
             <div className=' px-4 flex items-center justify-center mr-4'>
-                <div className='text-white font-bold bg-linear-to-br  from-purple-800 to-indigo-600 mr-4  rounded-3xl size-14 flex items-center justify-center shadow-lg  '>
+                <div className='text-white font-bold bg-linear-to-br  from-purple-600 to-indigo-600 mr-4  rounded-3xl size-14 flex items-center justify-center shadow-lg  '>
                         <p>EH</p>
 
                 </div>
@@ -62,7 +68,7 @@ const Sidebar = () => {
                 <ul>
                     {
                       SIDEITEMS.map((item)=>(
-                        <SlideList id={item.id} title={item.title} link={item.link}/>
+                        <SlideList key={item.id} id={item.id} title={item.title} link={item.link}/>
                       ))
                     }
 

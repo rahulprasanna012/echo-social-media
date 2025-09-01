@@ -1,15 +1,22 @@
 import { BellRing, PanelRight } from 'lucide-react'
-import React from 'react'
+import React, { type FC } from 'react'
 
-const Navbar = () => {
+type Props={
+  handleClick:()=>void;
+}
+
+const Navbar:FC<Props> = ({handleClick}) => {
+
+
+  
   return (
-    <header className='bg-white/90 flex items-center justify-around p-4'>
-        <button>
-            <PanelRight className='text-black' />
+    <header className='md:hidden  bg-blue flex items-center justify-around p-4'>
+        <button className='cursor-pointer group' onClick={handleClick}>
+            <PanelRight className='text-black group-hover:scale-105' />
 
         </button>
         <div className=' px-4 flex items-center justify-center mr-4'>
-                <div className='text-white font-bold bg-linear-to-br  from-purple-800 to-indigo-600 mr-4  rounded-3xl size-14 flex items-center justify-center shadow-lg  '>
+                <div className='text-white font-bold bg-linear-to-br  from-purple-600 to-indigo-600 mr-4  rounded-3xl size-14 flex items-center justify-center shadow-lg  '>
                         <p>EH</p>
 
                 </div>
@@ -20,8 +27,8 @@ const Navbar = () => {
 
             </div> 
 
-            <button>
-                <BellRing className='text-purple-600'/>
+            <button className='cursor-pointer group'>
+                <BellRing className='text-purple-600 group-hover:scale-105'/>
             </button>
 
 
