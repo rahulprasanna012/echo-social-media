@@ -19,7 +19,7 @@ const MainContent = () => {
 
         {
           posts?.map((post)=>(
-            <Feeds post={post}/>
+            <Feeds key={post.id} post={post}/>
           ))
 
         }

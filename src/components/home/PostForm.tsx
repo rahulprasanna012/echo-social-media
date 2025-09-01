@@ -13,7 +13,7 @@ const PostForm = () => {
   return (
     <form className=" bg-white p-6 rounded-lg">
       <div className="flex items-center ">
-        <ProfileIcon />
+        <ProfileIcon className="rounded-3xl size-12 mr-3" title="P"/>
 
         <p className="text-2xl font-semibold">What's on your mind?</p>
       </div>

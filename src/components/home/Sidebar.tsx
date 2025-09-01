@@ -79,7 +79,7 @@ const Sidebar = () => {
             </div>
              <hr className='text-gray-200'/>
             <div className='p-4 mr-4 flex items-center justify-center text-black '>
-                <ProfileIcon/>
+                <ProfileIcon className='rounded-3xl size-13 mr-3' title='P'/>
                   <div > 
                       <p>Prasanna S</p>
                       <p className='text-purple-600'>@rahulprasanna012</p>
