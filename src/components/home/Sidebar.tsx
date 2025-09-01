@@ -44,6 +44,9 @@ const Sidebar = () => {
   ]
 
 
+  
+
+
  
   return (
     <section className='  bg-purple-50/70  h-full w-72 flex flex-col justify-evenly'>
