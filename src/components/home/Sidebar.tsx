@@ -2,6 +2,7 @@ import type { Sidelist } from '@/types/sidebar'
 import {v4 as uuidv4} from "uuid"
 import React from 'react'
 import SlideList from './SlideList'
+import ProfileIcon from '../ProfileIcon'
 
 const Sidebar = () => {
   const SIDEITEMS:Sidelist[]=[
@@ -42,7 +43,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <section className='bg-white h-full w-72 flex flex-col justify-evenly'>
+    <section className='bg-white/90  h-full w-72 flex flex-col justify-evenly'>
 
             <div className=' px-4 flex items-center justify-center mr-4'>
                 <div className='text-white font-bold bg-linear-to-br  from-purple-800 to-indigo-600 mr-4  rounded-3xl size-14 flex items-center justify-center shadow-lg  '>
@@ -72,12 +73,10 @@ const Sidebar = () => {
             </div>
              <hr className='text-gray-200'/>
             <div className='p-4 mr-4 flex items-center justify-center text-black '>
-                  <div className="text-white font-bold bg-linear-to-br  from-purple-800 to-indigo-600  rounded-3xl size-12 mr-2 flex items-center justify-center shadow-lg " >
-                      <p>P</p>
-                  </div>
+                <ProfileIcon/>
                   <div > 
                       <p>Prasanna S</p>
-                      <p>@rahulprasanna012</p>
+                      <p className='text-purple-600'>@rahulprasanna012</p>
 
                   </div>
 
