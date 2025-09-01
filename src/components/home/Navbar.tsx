@@ -1,5 +1,5 @@
 import { BellRing, PanelRight } from 'lucide-react'
-import React, { type FC } from 'react'
+import { type FC } from 'react'
 
 type Props={
   handleClick:()=>void;
