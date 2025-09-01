@@ -42,11 +42,9 @@ const MainLayout: FC<MainLayoutProps> = ({
             <div
               role="dialog"
               aria-modal="true"
-               className={`
-    fixed inset-y-0 left-0 z-40 w-72 bg-white border-r shadow-xl md:hidden
+               className={` fixed inset-y-0 left-0 z-40 w-72 bg-white border-r shadow-xl md:hidden
     transform transition-transform duration-700 ease-in-out
-    ${isOpen ? "translate-x-0" : "-translate-x-full"}
-  `}
+    ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
             >
               {sidebar}
             </div>
