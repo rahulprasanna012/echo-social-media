@@ -1,4 +1,5 @@
 
+import { useState, type ChangeEvent } from 'react';
 import ProfileIcon from '../ProfileIcon'
 import { Image } from 'lucide-react'
 
@@ -34,7 +35,7 @@ const PostForm = () => {
         id="image-upload"
         type="file"
         accept="image/*"
-        onChange={()=>{}}
+        onChange={()=>{uploadImage}}
         className="hidden"
       />
       <button
