@@ -3,7 +3,7 @@ import {v4 as uuidv4} from "uuid"
 
 import SlideList from './SlideList'
 import ProfileIcon from '../ProfileIcon'
-import { useState } from 'react'
+
 
 const Sidebar = () => {
   const SIDEITEMS:Sidelist[]=[
@@ -44,7 +44,7 @@ const Sidebar = () => {
   ]
 
 
-  const [isActive, setActive]=useState<boolean>(false)
+  
 
 
 
