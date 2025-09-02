@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import CreatePage from "./pages/CreatePage";
 import EditProfilePage from "./pages/EditProfilePage";
+import MessagePage from "./pages/MessagePage";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="create" element={<CreatePage />} />
         <Route path="profile" element={<ProfilePage />} />
          <Route path="edit-profile" element={<EditProfilePage />} />
+         <Route path="message" element={<MessagePage />} />
       </Route>
 
       {/* Fallback: anything else -> /home */}
