@@ -1,32 +1,38 @@
-import React, { type FC } from "react";
+import Navbar from "@/components/home/Navbar";
+import Sidebar from "@/components/home/Sidebar";
 
-type NavbarProps = { handleClick: () => void };
+import  { useEffect, useState, type FC } from "react";
+import { Outlet } from "react-router-dom";
 
-type MainLayoutProps = {
-  isOpen: boolean;
-  handleClose: () => void;
 
-  navbar: React.ReactElement<NavbarProps>;
-  sidebar: React.ReactElement;
-  main: React.ReactElement;
-};
 
-const MainLayout: FC<MainLayoutProps> = ({
-  isOpen,
-  handleClose,
-  navbar,
-  sidebar,
-  main,
-}) => {
+const MainLayout = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => setIsOpen((v) => !v);
+  const handleClose = () => setIsOpen(false);
+
+  // Prevent background scroll when mobile drawer is open
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
+
+
   return (
     <div className="relative md:h-screen flex flex-col bg-linear-to-r from-purple-50 to-indigo-50">
       {/* Top nav (mobile + desktop) */}
-      {navbar}
+      <Navbar handleClick={handleClick} />
 
       <div className="flex flex-1 overflow-hidden">
         {/* Desktop sidebar */}
         <div className="hidden md:block md:w-72 md:flex-shrink-0 border-r bg-white">
-          {sidebar}
+          <Sidebar/>
         </div>
 
         {/* Mobile drawer */}
@@ -46,13 +52,16 @@ const MainLayout: FC<MainLayoutProps> = ({
     transform transition-transform duration-700 ease-in-out
     ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
             >
-              {sidebar}
+              <Sidebar/>
             </div>
           </>
         )}
 
         {/* Main content */}
-        <main className="flex-1 h-full overflow-y-auto">{main}</main>
+        <main className="flex-1  h-full overflow-y-auto">
+
+          <Outlet/>
+        </main>
       </div>
     </div>
   );

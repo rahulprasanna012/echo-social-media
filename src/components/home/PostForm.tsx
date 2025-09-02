@@ -70,7 +70,7 @@ const PostForm = () => {
           onChange={uploadImage}
           className="hidden"
         />
-        <button className="font-bold bg-linear-to-r from-purple-400  to-indigo-300 p-3 px-4 text-white rounded-2xl">
+        <button className="font-bold bg-linear-to-r from-purple-400  to-indigo-300 p-3 px-4 cursor-pointer hover:shadow text-white rounded-2xl">
           Post
         </button>
       </div>

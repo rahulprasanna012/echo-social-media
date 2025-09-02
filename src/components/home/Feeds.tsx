@@ -1,7 +1,7 @@
 import type { FeedReactionProps, PostTypes } from '@/types/post'
 import { Bookmark, ChevronDown, ChevronUp, HeartIcon, MessageCircle,  Send,  Share2Icon } from 'lucide-react'
 import  { useState, type FC } from 'react'
-import ProfileIcon from '../ProfileIcon'
+
 import FeedProfile from './FeedProfile'
 import FeedLabel from './FeedLabel'
 import FeedReaction from './FeedReaction'
@@ -74,7 +74,7 @@ const Feeds:FC<PropsTypes> = ({post}) => {
                 </div>
 
                 {
-                    isComment?<ChevronDown />:<ChevronUp/>
+                    isComment?<ChevronUp/>:<ChevronDown />
                 }
                 
             </button>

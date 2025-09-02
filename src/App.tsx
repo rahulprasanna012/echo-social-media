@@ -1,15 +1,24 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
+import CreatePage from "./pages/CreatePage";
 
-import Home from './pages/Home'
-
-
-const App = () => {
+export default function App() {
   return (
-    <>
-      <Home/>
-      
-    </>
-   
-  )
-}
+    <Routes>
+      {/* All pages share MainLayout */}
+      <Route element={<MainLayout />}>
+        {/* Default (/) */}
+        <Route index element={<HomePage />} />
+        {/* Explicit /home */}
+        <Route path="home" element={<HomePage />} />
+        <Route path="create" element={<CreatePage />} />
+        <Route path="profile" element={<ProfilePage />} />
+      </Route>
 
-export default App
+      {/* Fallback: anything else -> /home */}
+      <Route path="*" element={<Navigate to="/home" replace />} />
+    </Routes>
+  );
+}

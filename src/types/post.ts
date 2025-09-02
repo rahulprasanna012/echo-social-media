@@ -28,3 +28,7 @@ export type FeedCommentsProps =  FeedProfileProps&{
     commentsList:string[]
     
 }
+
+export type MainLayoutProps = { 
+  main: React.ReactElement;
+};

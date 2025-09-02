@@ -1,9 +1,10 @@
 
-import Feeds from "./Feeds";
-import PostForm from "./PostForm";
+
+import Feeds from "@/components/home/Feeds";
+import PostForm from "@/components/home/PostForm";
 import { posts } from "@/lib/data";
 
-const MainContent = () => {
+const HomePage = () => {
   return (
     <section className="  text-black  w-full  flex justify-center items-center ">
       <div className="w-11/12 md:w-3/5 ">
@@ -32,4 +33,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default HomePage;

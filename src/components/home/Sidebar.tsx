@@ -26,7 +26,7 @@ const Sidebar = () => {
        {
         id:uuidv4(),
         title:"Create",
-        link:"/post"
+        link:"/create"
       },
       {
         id:uuidv4(),
