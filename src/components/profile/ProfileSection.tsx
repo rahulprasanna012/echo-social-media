@@ -1,7 +1,10 @@
+import { useRedirect } from '@/hooks/useRedirect'
 import { Calendar } from 'lucide-react'
 
 
 const ProfileSection = () => {
+
+    const {redirect}=useRedirect()
   return (
     <section className='m-6  my-10 md:my-0   bg-white rounded-lg'>
 
@@ -40,7 +43,9 @@ const ProfileSection = () => {
 
             </ul>
             <div className='p-6'>
-                <button className='text-center hover:bg-gray-50 hover:text-black w-full rounded-lg cursor-pointer  border border-purple-300 text-purple-600 font-medium p-2'>
+                <button className='text-center hover:bg-gray-50 hover:text-black w-full rounded-lg cursor-pointer  border border-purple-300 text-purple-600 font-medium p-2' 
+                onClick={()=>{redirect("/edit-profile")}}
+                >
                 Edit Profile
             </button>
 

@@ -5,10 +5,6 @@ const CreatePage = () => {
   return (
     <section className='text-black  w-full  flex justify-center items-center '>
       <CreatePost/>
-      
-
-
-
     </section>
   )
 }

@@ -28,16 +28,16 @@ const Sidebar = () => {
         title:"Create",
         link:"/create"
       },
-      {
-        id:uuidv4(),
-        title:"Search",
-        link:"/search"
-      },
-      {
-        id:uuidv4(),
-        title:"Notification",
-        link:"/notification"
-      },
+      // {
+      //   id:uuidv4(),
+      //   title:"Search",
+      //   link:"/search"
+      // },
+      // {
+      //   id:uuidv4(),
+      //   title:"Notification",
+      //   link:"/notification"
+      // },
 
 
 

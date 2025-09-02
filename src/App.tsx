@@ -3,6 +3,7 @@ import MainLayout from "./layout/MainLayout";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import CreatePage from "./pages/CreatePage";
+import EditProfilePage from "./pages/EditProfilePage";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="home" element={<HomePage />} />
         <Route path="create" element={<CreatePage />} />
         <Route path="profile" element={<ProfilePage />} />
+         <Route path="edit-profile" element={<EditProfilePage />} />
       </Route>
 
       {/* Fallback: anything else -> /home */}

@@ -20,10 +20,10 @@ const Icons:IconType[]=[
         icon:<User />},
         {id:"create",
         icon:<SquarePen />},
-         {id:"search",
-        icon:<Search />},
-         {id:"notification",
-        icon:<BellRing />},
+        //  {id:"search",
+        // icon:<Search />},
+        //  {id:"notification",
+        // icon:<BellRing />},
           
 
 ]
