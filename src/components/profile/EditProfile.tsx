@@ -1,6 +1,6 @@
-import React from 'react'
+
 import BackButton from '../create/BackButton'
-import { CameraIcon, CloudUpload, Image, Save, X } from 'lucide-react'
+import { CameraIcon, CloudUpload, Save, X } from 'lucide-react'
 import UploadImage from '../UploadImage'
 import Input from '../Input'
 import SecondaryButton from '../SecondaryButton'

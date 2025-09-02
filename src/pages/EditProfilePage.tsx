@@ -1,6 +1,5 @@
 import EditProfile from '@/components/profile/EditProfile'
-import { Image } from 'lucide-react'
-import React from 'react'
+
 
 const EditProfilePage = () => {
   return (

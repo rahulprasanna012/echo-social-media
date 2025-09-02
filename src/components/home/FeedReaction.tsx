@@ -1,6 +1,6 @@
 
 import type { FeedReactionProps } from '@/types/post'
-import React, { type FC } from 'react'
+import  { type FC } from 'react'
 
 
 

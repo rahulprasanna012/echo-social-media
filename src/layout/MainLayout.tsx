@@ -1,7 +1,7 @@
 import Navbar from "@/components/home/Navbar";
 import Sidebar from "@/components/home/Sidebar";
 
-import  { useEffect, useState, type FC } from "react";
+import  { useEffect, useState} from "react";
 import { Outlet } from "react-router-dom";
 
 

@@ -1,5 +1,5 @@
 import type { Sidelist } from '@/types/sidebar'
-import { BellRing, House, MessageCircle, Search, SquarePen, User } from 'lucide-react'
+import { House, MessageCircle,  SquarePen, User } from 'lucide-react'
 import  { type FC, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
