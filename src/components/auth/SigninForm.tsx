@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AuthInput from "./AuthInput";
-import { KeyRound, Mail } from "lucide-react";
+import { CircleUserRound, KeyRound, Mail, User } from "lucide-react";
 import { useRedirect } from "@/hooks/useRedirect";
 
 type LoginFormTypes = {
@@ -8,7 +8,7 @@ type LoginFormTypes = {
   password: string;
 };
 
-const LoginForm = () => {
+const SigninForm = () => {
   const [login, setLogin] = useState<LoginFormTypes>({
     email: "",
     password: "",
@@ -27,12 +27,30 @@ const LoginForm = () => {
   };
 
   return (
-    <div className=" w-full md:w-1/4   rounded-2xl shadow p-6 bg-linear-to-r from-purple-50  to-indigo-50">
-      <h1 className="text-black text-center font-bold text-3xl">Login</h1>
+    <div className=" w-full md:w-1/4   rounded-2xl p-6 bg-linear-to-r from-purple-50  to-indigo-50">
+      <h1 className="text-black text-center font-bold text-3xl">Sign in</h1>
       <form className="text-center" onSubmit={handleForm}>
         <AuthInput
-          error="mail or username not found"
-          placeholder="mail or username"
+          error="Username not found"
+          placeholder="@username"
+          type="email"
+          value={login.email}
+          name="email"
+          icon={<User />}
+          getInput={getInput}
+        />
+        <AuthInput
+          error="Username not found"
+          placeholder="name"
+          type="email"
+          value={login.email}
+          name="email"
+          icon={<CircleUserRound />}
+          getInput={getInput}
+        />
+        <AuthInput
+          error="Username not found"
+          placeholder="mail"
           type="email"
           value={login.email}
           name="email"
@@ -56,4 +74,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SigninForm;
