@@ -9,15 +9,10 @@ config()
 export const createUser = async (req, res) => {
   try {
     const { name, username, email, password, bio } = req.body;
-      
-   
-    
-    
     if (!name || !username || !email || !password) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    
     if (password.length < 6) {
       return res.status(400).json({ error: "Password must be at least 6 characters long" });
     }
@@ -65,7 +60,7 @@ export const createUser = async (req, res) => {
     res.status(201).json({ message: "User created successfully" ,user:userObj, token:token});
   } catch (err) {
 
-    console.error("Error creating user:", err);
+
     res.status(500).json({ error: "Registration failed" });
   }
 };

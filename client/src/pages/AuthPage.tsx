@@ -1,12 +1,20 @@
-// pages/AuthPage.tsx
+
 import LoginForm from '@/components/auth/LoginForm'
 import SigninForm from '@/components/auth/SignupForm'
-import React, { useState } from 'react'
+import Cookies from 'js-cookie'
+import { useEffect, useState } from 'react'
+import {  useNavigate } from 'react-router-dom'
 
 const AuthPage = () => {
   const [isNew, setIsNew] = useState<boolean>(false)
   const buttonText = isNew ? 'Login' : 'Sign up'
   const text = isNew ? 'Already have an account?' : "Don't have an account?"
+const navigate=useNavigate();
+
+  useEffect(() => {
+    const t = Cookies.get("token");
+    if (t) navigate("/", { replace: true });
+  }, [navigate]);
 
   return (
     <main

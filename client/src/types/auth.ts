@@ -10,3 +10,9 @@ export type SignupFormTypes = {
 export type SignupDTO = SignupFormTypes & {
   profile?: File|null; 
 };
+
+
+export type LoginFormTypes = {
+  indentifires: string;
+  password: string;
+};

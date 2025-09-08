@@ -3,10 +3,23 @@ import { v4 as uuidv4 } from "uuid";
 
 import SlideList from "./SlideList";
 import ProfileIcon from "../ProfileIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LogOut, User } from "lucide-react";
+import Cookies from "js-cookie";
+
 
 const Sidebar = () => {
+
+  const navigate=useNavigate()
+
+
+  const loggedOut=()=>{
+  
+
+  Cookies.remove("token")
+  navigate("/login", { replace: true });
+  
+}
   const SIDEITEMS: Sidelist[] = [
     {
       id: uuidv4(),
@@ -91,12 +104,12 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="text-red-600  p-2  hover:bg-purple-300/20 cursor-pointer  rounded-xl ">
-            <Link to="/login">
+            <button onClick={loggedOut}>
               <div className="flex">
                 <LogOut />
                 <p className="ml-3">logout</p>
               </div>
-            </Link>
+            </button>
           </li>
         </ul>
       </div>

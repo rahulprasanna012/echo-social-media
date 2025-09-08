@@ -1,8 +1,12 @@
-import type {SignupDTO } from "@/types/auth";
+
+import type {LoginFormTypes, SignupDTO } from "@/types/auth";
 import api from "@/utils/api.ts";
+import axios from "axios";
 
 
 import Cookies from "js-cookie";
+ 
+
 
 export const signUp = async (data: SignupDTO & { profile?: File }) => {
   try {
@@ -30,9 +34,37 @@ export const signUp = async (data: SignupDTO & { profile?: File }) => {
       Cookies.set("token", res.data.token, { expires: 2 });
     }
 
-    return res;
+    return res.data;
   } catch (err) {
-    console.error("Signup failed:", err);
-    throw err;
+
+    if(axios.isAxiosError(err)){
+
+      throw err.response?.data.error;
+
+    }
   }
 };
+
+
+export const Login = async (data: LoginFormTypes) => {
+  try {
+
+      
+
+    const res = await api.post("/auth/login", data);
+
+    if (res.data.token) {
+      Cookies.set("token", res.data.token, { expires: 2 });
+    }
+
+    return res.data;
+  } catch (err) {
+
+    if(axios.isAxiosError(err)){
+
+      throw err.response?.data.error;
+
+    }
+  }
+};
+

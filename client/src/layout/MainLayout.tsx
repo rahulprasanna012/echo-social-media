@@ -1,5 +1,7 @@
 import Navbar from "@/components/home/Navbar";
 import Sidebar from "@/components/home/Sidebar";
+import { useRedirect } from "@/hooks/useRedirect.ts";
+import Cookies from "js-cookie";
 
 import  { useEffect, useState} from "react";
 import { Outlet } from "react-router-dom";
@@ -12,6 +14,7 @@ const MainLayout = () => {
 
   const handleClick = () => setIsOpen((v) => !v);
   const handleClose = () => setIsOpen(false);
+  const {redirect}=useRedirect()
 
   // Prevent background scroll when mobile drawer is open
   useEffect(() => {
@@ -21,6 +24,12 @@ const MainLayout = () => {
       document.body.style.overflow = prev;
     };
   }, [isOpen]);
+
+
+  useEffect(()=>{
+    const token=Cookies.get("token")
+    if (!token) redirect("/login")
+  },[])
 
 
 

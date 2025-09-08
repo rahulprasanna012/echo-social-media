@@ -4,10 +4,7 @@ import { CircleUserRound ,FolderPen,KeyRound, Mail, PlusIcon, User } from "lucid
 import { useRedirect } from "@/hooks/useRedirect";
 import type {  SignupFormTypes } from "@/types/auth";
 import { signUp } from "@/services/authService.ts";
-// import { signUp } from "@/services/authService.ts";
-
-
-
+import { useUser } from "@/context/UserContext.tsx";
 
 
 
@@ -17,8 +14,8 @@ const SignupForm: React.FC = () => {
    const [profile, setProfile] = useState<File>();
 
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-
-  const [errors, setErrors] = useState<string>("")
+  const {errors,handleError,handleUser,handleLoading,loading}=useUser()
+  
   const { redirect } = useRedirect();
 
   function getInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -30,18 +27,18 @@ const SignupForm: React.FC = () => {
 
   
   if (!user.email) {
-    setErrors("Email is required");
+    handleError("Email is required");
     valid = false;
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
-    setErrors("Enter a valid email address");
+    handleError("Enter a valid email address");
     valid = false;
   }
 
   if (!user.password) {
-     setErrors("Password is required");
+     handleError("Password is required");
     valid = false;
   } else if (user.password.length < 6) {
-    setErrors("Password must be at least 6 characters");
+    handleError("Password must be at least 6 characters");
     valid = false;
   }
 
@@ -61,11 +58,8 @@ const SignupForm: React.FC = () => {
 
   const handleForm =async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleLoading(true)
     if (!validate()) return;
-
-    
-    
-
     const formData={
       name:user.name,
       email:user.email,
@@ -73,17 +67,24 @@ const SignupForm: React.FC = () => {
       profile:profile,
       password:user.password,
       bio:user.bio
-
-
     }
-
-  
-
-
-    const res= await signUp(formData) 
-    console.log(res)
+    try{
+        const res= await signUp(formData) 
+         redirect("/")
+        handleUser(res.user)
+        handleError("")
+       
+        
+    }catch(err:any){
+      handleError(err);
+      
+    }finally{
+      handleLoading(false)
+    }
     
-    redirect("/");
+    
+    
+    
   };
 
   const isDisabled = useMemo(() => !user.email || !user.password, [user]);
@@ -202,9 +203,9 @@ const SignupForm: React.FC = () => {
 
           <button
             className="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2.5 text-white shadow-lg shadow-purple-600/20 transition hover:brightness-[1.05] disabled:cursor-not-allowed disabled:opacity-60"
-            disabled={isDisabled}
+            disabled={isDisabled || loading}
           >
-            Sign in
+            {loading?"wait...":"Sign up"}
           </button>
 
         </form>
