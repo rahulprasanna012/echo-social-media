@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import AuthInput from "./AuthInput";
-import { CircleUserRound, Eye, EyeOff, KeyRound, Mail, PlusIcon } from "lucide-react";
+import { KeyRound, Mail } from "lucide-react";
 import { useRedirect } from "@/hooks/useRedirect";
 
 type LoginFormTypes = {
@@ -10,8 +10,8 @@ type LoginFormTypes = {
 
 const LoginForm: React.FC = () => {
   const [login, setLogin] = useState<LoginFormTypes>({ email: "", password: "" });
-  const [showPwd, setShowPwd] = useState(false);
-  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+
+
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const { redirect } = useRedirect();
 
@@ -27,12 +27,6 @@ const LoginForm: React.FC = () => {
     return Object.keys(next).length === 0;
   }
 
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    setAvatarPreview(url);
-  };
 
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,7 +65,7 @@ const LoginForm: React.FC = () => {
             <AuthInput
               error={errors.password}
               placeholder="••••••••"
-              type={showPwd ? "text" : "password"}
+              type= "password"
               value={login.password}
               name="password"
               icon={<KeyRound className="h-4 w-4" />}

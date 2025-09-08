@@ -1,20 +1,23 @@
 import React, { useMemo, useState } from "react";
 import AuthInput from "./AuthInput";
-import { CircleUserRound, Eye, EyeOff, KeyRound, Mail, PlusIcon } from "lucide-react";
+import { CircleUserRound ,KeyRound, Mail, PlusIcon } from "lucide-react";
 import { useRedirect } from "@/hooks/useRedirect";
+import type { SignupFormErrorTypes, SignupFormTypes } from "@/types/auth";
 
-type SignupFormTypes = {
-  email: string;
-  password: string;
-  confirmpassword: string;
-  bio:string
-};
+
+
+
+
 
 const SignupForm: React.FC = () => {
-  const [user, setUser] = useState<SignupFormTypes>({ email: "", password: "" ,confirmpassword:"",bio:""});
+  const [user, setUser] = useState<SignupFormTypes>({ email: "", password: "" ,bio:""});
  
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [errors, setErrors] = useState<SignupFormErrorTypes>({
+  emailErr: "",
+  passwordErr: "",
+  bioErr:""}
+);
   const { redirect } = useRedirect();
 
   function getInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -22,12 +25,37 @@ const SignupForm: React.FC = () => {
   }
 
   function validate(): boolean {
-    const next: typeof errors = {};
-    if (!user.email) next.email = "Email is required";
-    if (!user.password) next.password = "Password is required";
-    setErrors(next);
-    return Object.keys(next).length === 0;
+  let valid = true;
+  const nextErrors: SignupFormErrorTypes = {
+    emailErr: "",
+    passwordErr: "",
+    bioErr: "",
+  };
+
+  if (!user.email) {
+    nextErrors.emailErr = "Email is required";
+    valid = false;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
+    nextErrors.emailErr = "Enter a valid email address";
+    valid = false;
   }
+
+  if (!user.password) {
+    nextErrors.passwordErr = "Password is required";
+    valid = false;
+  } else if (user.password.length < 6) {
+    nextErrors.passwordErr = "Password must be at least 6 characters";
+    valid = false;
+  }
+
+  if (!user.bio) {
+    nextErrors.bioErr = "Bio cannot be empty";
+    valid = false;
+  }
+
+  setErrors(nextErrors);
+  return valid;
+}
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -39,7 +67,7 @@ const SignupForm: React.FC = () => {
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
-    // TODO: call your API here
+    
     redirect("/");
   };
 
@@ -91,7 +119,7 @@ const SignupForm: React.FC = () => {
         {/* Form */}
         <form className="space-y-4" onSubmit={handleForm} noValidate>
           <AuthInput
-            error={errors.email}
+            error={errors.emailErr}
             placeholder="you@example.com"
             type="email"
             value={user.email}
@@ -102,7 +130,7 @@ const SignupForm: React.FC = () => {
 
           <div className="relative">
             <AuthInput
-              error={errors.password}
+              error={errors.passwordErr}
               placeholder="••••••••"
               type={"password"}
               value={user.password}
@@ -124,6 +152,12 @@ const SignupForm: React.FC = () => {
               onChange={()=>{}}
               className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-black outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500"
             />
+            {errors && (
+          <div id={`bio-error`} className="mt-1 text-left text-sm text-red-600">
+            {errors.bioErr}
+          </div>
+        )}
+
           </div>
 
          
