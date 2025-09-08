@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from'cors'
 import authRouter from "./routes/authRoute.js"
 import { cloudinaryConfiguration } from "./config/cloudinary.js"
+import { postRouter } from "./routes/postRoute.js";
 
 config()
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.get("/api/health", (req,res) => res.send("OK"));
 
 app.use("/api/auth",authRouter)
+app.use("/api/post",postRouter)
 
 
 

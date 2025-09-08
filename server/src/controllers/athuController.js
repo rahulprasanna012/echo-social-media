@@ -54,7 +54,7 @@ export const createUser = async (req, res) => {
  
     const userObj = user.toObject();
     delete userObj.password;
-    const token =jwt.sign({ id: user._id, email: user.email },process.env.TOKEN_SCERET)
+    const token =jwt.sign({ id: user._id, email: user.email },process.env.TOKEN_SCERET,{expiresIn:"2d"})
 
 
     res.status(201).json({ message: "User created successfully" ,user:userObj, token:token});
@@ -67,7 +67,7 @@ export const createUser = async (req, res) => {
 
 export const LoginUser = async (req, res) => {
   try {
-    console.log(req.body)// undifined
+    
     const {indentifires, password } = req.body;
 
     console.log(indentifires)
@@ -102,7 +102,7 @@ export const LoginUser = async (req, res) => {
    
     const userObj = user.toObject();
     delete userObj.password;
-    const token =jwt.sign({ id: user._id, email: user.email },process.env.TOKEN_SCERET)
+    const token =jwt.sign({ id: user._id, email: user.email },process.env.TOKEN_SCERET,{expiresIn:"2d"})
 
 
     res.status(201).json({ message: "User created successfully" ,user:userObj, token:token});
