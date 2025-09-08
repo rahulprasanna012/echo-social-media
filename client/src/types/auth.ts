@@ -1,16 +1,12 @@
+// types/auth.ts
 export type SignupFormTypes = {
+  name: string;
   email: string;
+  username: string;
   password: string;
-  bio:string
+  bio?: string;
 };
 
-export type SignupFormErrorTypes = {
-  emailErr?: string;
-  passwordErr?: string;
-  bioErr?:string
+export type SignupDTO = SignupFormTypes & {
+  profile?: File|null; 
 };
-
-export type SignupData= &{
-
-    profile:string
-}

@@ -3,6 +3,9 @@ import multer from "multer";
 const storage=multer.memoryStorage();
 
 const fileFilter=(req,file,cb)=>{
+    console.log("profl",file.mimetype);
+    
+
     const allowed=["image/jpeg", "image/png", "image/webp", "image/jpg", "image/gif"];
 
     if (allowed.includes(file.mimetype)) cb(null,true)
@@ -14,6 +17,6 @@ export const upload=multer({
     storage,
     fileFilter,
     limits:{
-        fileSize: 5*1024 * 1024 
+        fileSize: 5 * 1024 * 1024 
     },
 })

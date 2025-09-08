@@ -5,7 +5,6 @@ import { upload } from "../middlewares/multer.js";
 const authRouter=express.Router()
 
 
-
 authRouter.post("/register",upload.single("profile"),createUser)
 authRouter.post("/login",LoginUser)
 

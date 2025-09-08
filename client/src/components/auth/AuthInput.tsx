@@ -9,6 +9,7 @@ type AuthInputProps = {
   icon: ReactElement;
   name: string;
   value: string;
+  isRequired?:boolean
 };
 
 const AuthInput: React.FC<AuthInputProps> = ({
@@ -19,6 +20,7 @@ const AuthInput: React.FC<AuthInputProps> = ({
   icon,
   value,
   name,
+  isRequired=false
 }) => {
   const [showPwd, setShowPwd] = useState(false);
   const isPassword = type === "password";
@@ -34,7 +36,7 @@ const AuthInput: React.FC<AuthInputProps> = ({
             type={inputType}
             name={name}
             placeholder={placeholder}
-            required
+            required={isRequired}
             value={value}
             onChange={getInput}
             aria-invalid={!!error}
