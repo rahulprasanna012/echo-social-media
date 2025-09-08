@@ -1,5 +1,5 @@
 import LoginForm from '@/components/auth/LoginForm'
-import SigninForm from '@/components/auth/SigninForm';
+import SigninForm from '@/components/auth/SignupForm';
 import React, { useState } from 'react'
 
 const AuthPage = () => {
@@ -17,7 +17,7 @@ const AuthPage = () => {
           isNew?<SigninForm/>:<LoginForm/>
         }
 
-        <p>{text} <button className='text-purple-600 hover:underline cursor-pointer' onClick={()=>setIsNew(!isNew)}>{buttonText}</button> </p>
+        <p>{text} <button className='text-purple-600 hover:underline cursor-pointer mt-6' onClick={()=>setIsNew(!isNew)}>{buttonText}</button> </p>
     </main>
   )
 }

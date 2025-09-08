@@ -3,7 +3,7 @@ import  React, { type ReactElement } from "react";
 
 type UploadImageProps={
     id:string,
-    image:ReactElement,
+    image?:ReactElement,
     title:string,
     classAdd?:string|undefined
 }
