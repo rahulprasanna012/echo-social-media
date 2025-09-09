@@ -12,17 +12,15 @@ config()
 
 const app = express()
 
+const ALLOWED_ORIGIN = process.env.ORIGIN || "https://social.prasannanxtwave.site";
 
-app.use(
-  cors({
-    origin: [
-    "https://social.prasannanxtwave.site",
-    "http://social.prasannanxtwave.site"
-
-  ],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: ALLOWED_ORIGIN,
+  credentials: true,
+  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"],
+}));
+app.options("*", cors({ origin: ALLOWED_ORIGIN, credentials: true }));
 
 
 app.use(express.json())
