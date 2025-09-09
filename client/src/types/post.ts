@@ -1,34 +1,58 @@
-export type PostTypes={
+export type Comment = {
+  _id: string;
+  user: Author;
+  text: string;
+  createdAt: string;
+};
 
-    id:string,
-    userId:string,
-    date:Date,
-    content:string,
-    image?:string,
-    likes_count:number,
-    comments:string[],
-    comments_count:number,
-    share_count:number,
-    labels:string[]
+export type PostTypes = {
+  _id: string;
+  author: Author;
+  content?: string;
+  image?: string;
+  label?: string[];
+  likes?: string[];          
+  comments?: Comment[];
+  createdAt: string;        
 
-}
-
-export type FeedReactionProps={
-    icon:React.ReactElement,
-    content:number
-}
+  likes_count?: number;
+  comments_count?: number;
+  shareCount?: number;
+};
+export type FeedReactionProps = {
+  icon: React.ReactElement;
+  content: number | string;
+  onClick?: () => void;      
+  active?: boolean;          
+  title?: string;            
+  disabled?: boolean;        
+};
 
 export type FeedProfileProps = {
-  userId: string
-  date?: Date|undefined
-}
+  author: Author;
+  date: string | Date;      
+};
 
-export type FeedCommentsProps =  FeedProfileProps&{
-    content:number
-    commentsList:string[]
-    
-}
+export type FeedCommentsProps = {
+  profile:string,
+  username:string,           
+  date: string | Date;       
+  content: number;           
+  commentsList: Comment[];   
+};
 
 export type MainLayoutProps = { 
   main: React.ReactElement;
 };
+
+
+export type PostFormTypes={
+
+    file:File|null,
+    content:string,
+    label:string
+
+}
+
+
+export type Author = { _id: string; username: string; email: string;profile:string };

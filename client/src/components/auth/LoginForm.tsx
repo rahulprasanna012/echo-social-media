@@ -17,7 +17,6 @@ const LoginForm: React.FC = () => {
 
   function getInput(e: React.ChangeEvent<HTMLInputElement>): void {
 
-    console.log(e.target.name);
     
     setLogin({ ...login, [e.target.name]: e.target.value });
   }

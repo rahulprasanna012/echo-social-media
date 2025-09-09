@@ -1,19 +1,70 @@
-import  { useState, type ChangeEvent } from "react";
+import  { use, useState, type ChangeEvent, type FormEvent } from "react";
 import ProfileIcon from "../ProfileIcon";
 import { Image, X } from "lucide-react";
+import { useUser } from "@/context/UserContext.tsx";
+import { createPost } from "@/services/postService.ts";
+
+
 
 const PostForm = () => {
-  const [file, setFile] = useState<string | null>(null);
+  const [prevfile, setPrevFile] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [content,setContent]=useState("")
+  const [label,setLabel]=useState("")
+
+  const {user,loading,handleLoading,handleError}=useUser();
+
 
   const uploadImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFile(URL.createObjectURL(e.target.files[0]));
+      setPrevFile(URL.createObjectURL(e.target.files[0]));
+      setFile(e.target.files[0])
     }
   };
+
+   
+
+
+  const handleSubmit=async (e:FormEvent<HTMLFormElement>)=>{
+
+    e.preventDefault()
+    handleLoading(true)
+    const formaData={
+      content,
+      label,
+      file
+    }
+
+    try{
+
+      await createPost(formaData)
+
+      setContent("")
+      setFile(null)
+      setLabel("")
+      setPrevFile("")
+
+    }catch(err){
+
+      console.error(err)
+    }finally{
+      handleLoading(false)
+    }
+    
+
+
+  }
+
+  
+  
   return (
-    <form className=" bg-white p-6 rounded-lg">
+    <form className=" bg-white p-6 rounded-lg" onSubmit={handleSubmit}>
       <div className="flex items-center ">
-        <ProfileIcon className="rounded-3xl size-12 mr-3" title="P"/>
+
+        {
+          user?.profile?    <img src={user.profile} alt={user.name} className="size-12 rounded-full mr-2"/>    :<ProfileIcon className="rounded-3xl size-12 mr-3" title={user?.name[0]}/>
+        }
+        
 
         <p className="text-2xl font-semibold">What's on your mind?</p>
       </div>
@@ -22,6 +73,8 @@ const PostForm = () => {
         className="textarea my-6 text-sm textarea-sm border border-purple-400 focus:shadow-purple-600 w-full bg-white"
         rows={8}
         placeholder="Share your Thoughts"
+        value={content}
+        onChange={(e)=>setContent(e.target.value)}
       ></textarea>
       <div className="pb-6">
         <label className="font-semibold">Tags (Optinal)</label>
@@ -29,16 +82,18 @@ const PostForm = () => {
         <input
           className="input w-full border border-purple-400 focus:shadow-purple-600  bg-white"
           type="text"
+          value={label}
+          onChange={(e)=>setLabel(e.target.value)}
           placeholder="#socialmedia #lifestyle #photograph"
         />
         <p className="text-gray-400 text-sm">Separate tags with spaces</p>
       </div>
     
             {
-                file&&(<div className="flex items-start justify-center">
+                prevfile&&(<div className="flex items-start justify-center">
                
                 
-                    <img src={file} className="size-96"/>
+                    <img src={prevfile} className="size-96"/>
                     <button className="cursor-pointer border rounded-full ml-11" onClick={()=>setFile(null)}><X className="text-red-500"/> </button>
                 
 
@@ -70,8 +125,8 @@ const PostForm = () => {
           onChange={uploadImage}
           className="hidden"
         />
-        <button className="font-bold bg-linear-to-r from-purple-400  to-indigo-300 p-3 px-4 cursor-pointer hover:shadow text-white rounded-2xl">
-          Post
+        <button type="submit" className="font-bold bg-linear-to-r from-purple-400  to-indigo-300 p-3 px-4 cursor-pointer hover:shadow text-white rounded-2xl">
+          {loading?"posting...":"post"}
         </button>
       </div>
     </form>

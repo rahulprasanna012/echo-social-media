@@ -6,7 +6,6 @@ const parser=new DatauriParser()
 
 export const toDataUri=(file)=>{
 
-    console.log("link",file);
     
 
     const ext= path.extname(file.originalname).toString();

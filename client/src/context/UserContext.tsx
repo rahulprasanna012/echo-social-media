@@ -1,88 +1,80 @@
+// context/UserContext.tsx
+import { getMe } from "@/services/userService.ts";
+import React, {
+  createContext, useContext, useState, useMemo, useCallback, useEffect, type ReactNode
+} from "react";
 
-import React, { createContext, useContext, useState, type ReactNode } from "react";
+type UserTypes = {
+  name: string;
+  email: string;
+  username: string;
+  _id: string;
+  bio?: string;
+  profile?: string;
+  cover_image?: string;
+  followers?: string[];
+  following?: string[];
+};
 
+type ContextValueTypes = {
+  errors: string;
+  handleError: (err: string) => void;
+  handleUser: (data: UserTypes | null) => void;
+  user: UserTypes | null;
+  handleLoading: (state: boolean) => void;
+  loading: boolean;
+};
 
-type ContextValueTypes={
-errors:string;
-handleError:(err:string)=>void;
-handleUser :(data:UserTypes)=>void;
-user:UserTypes;
-handleLoading:(state:boolean)=>void;
-loading:boolean;
-}
+const UserContext = createContext<ContextValueTypes | undefined>(undefined);
 
-type UserTypes={
-    name:string;
-        email:string;
-        username:string;
-        _id:string;
-        bio?:string;
-        profile?:string;
-        cover_image?:string;
-        followers?:string[];
-        following?:string[]
-}
-
-
-const UserContext=createContext<ContextValueTypes|undefined>(undefined)
-
-
-
-
-export const UserProvider:React.FC<{children:ReactNode}>=({children})=>{
-
-    const [errors, setErrors] = useState<string>("")
-    const [loading,setLoading]=useState<boolean>(false)
-    const [user,setUser]=useState<UserTypes>({
-        name:"",
-        email:"",
-        username:"",
-        _id:"",
-        bio:"",
-        profile:"",
-        cover_image:"",
-        followers:[],
-        following:[]
-    })
-
-    
-   
-
-    const handleUser=(data:UserTypes)=>{
-        setUser(data)
+export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  // Read localStorage ONCE
+  const [user, setUser] = useState<UserTypes | null>(() => {
+    try {
+      const raw = localStorage.getItem("user");
+      return raw ? (JSON.parse(raw) as UserTypes) : null;
+    } catch {
+      return null;
     }
-    const handleLoading=(state:boolean)=>{
-        setLoading(state)
+  });
+
+  const [errors, setErrors] = useState("");
+  const [loading, setLoading] = useState(false);
+
+useEffect(() => {
+  const init = async () => {
+    try {
+      const freshUser = await getMe();
+      setUser(freshUser);
+    } catch {
+      setUser(null);
     }
-    const handleError=(err:string)=>{
-        setErrors(err)
-    }
+  };
+  init();
+}, []);
 
+  const handleUser = useCallback((data: UserTypes | null) => setUser(data), []);
+  const handleLoading = useCallback((state: boolean) => setLoading(state), []);
+  const handleError = useCallback((err: string) => setErrors(err), []);
 
-    const value:ContextValueTypes={
-        errors,
-        handleError,
-        handleUser,
-        user,
-        handleLoading,
-        loading,
-    }
+  const value = useMemo(
+    () => ({
+      errors,
+      handleError,
+      handleUser,
+      user,
+      handleLoading,
+      loading,
+    }),
+    [errors, handleError, handleUser, user, handleLoading, loading]
+  );
 
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>
+ 
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
 
-
-}
-
-
-
-export const useUser=()=>{
-
-    const ctx=useContext(UserContext)
-
-    if (!ctx){
-        throw new Error("useUser must be used within an UserProvider")
-    }
-
-    return ctx
-
-}
+export const useUser = () => {
+  const ctx = useContext(UserContext);
+  if (!ctx) throw new Error("useUser must be used within an UserProvider");
+  return ctx;
+};

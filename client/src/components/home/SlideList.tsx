@@ -1,56 +1,32 @@
-import type { Sidelist } from '@/types/sidebar'
-import { House, MessageCircle,  SquarePen, User } from 'lucide-react'
-import  { type FC, type ReactNode } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { House, MessageCircle, SquarePen, User } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import type { Sidelist } from "@/types/sidebar";
 
+const ICONS: Record<string, React.ReactNode> = {
+  home: <House />,
+  messages: <MessageCircle />,
+  profile: <User />,
+  create: <SquarePen />,
+};
 
-type IconType={
-    id:string,
-    icon:ReactNode
-}
+const SlideList: React.FC<Sidelist> = ({ id, title, link }) => {
+  const icon = ICONS[title.toLowerCase()] ?? null;
 
-
-const Icons:IconType[]=[
-
-    {id:"home",
-        icon:<House/>},
-        {id:"messages",
-        icon:<MessageCircle />},
-        {id:"profile",
-        icon:<User />},
-        {id:"create",
-        icon:<SquarePen />},
-        {id:"create",
-        icon:<SquarePen />},
-
-
-
-        //  {id:"search",
-        // icon:<Search />},
-        //  {id:"notification",
-        // icon:<BellRing />},
-          
-
-]
-
-
-const SlideList :FC<Sidelist>= ({id,title,link}) => {
-
-    const location=useLocation();
-
-    const isActive=link===location.pathname
-
-  const foundIcon=Icons.find((i)=>i.id===title.toLowerCase())
   return (
     <li key={id}>
-        <Link to={link}>
-            <div className={`text-black flex p-2 hover:text-purple-600 hover:bg-purple-300/20  rounded-xl my-1 ${isActive?"text-purple-600 bg-purple-300/20":""}`} >
-                {foundIcon?.icon}
-                <p className='ml-3'>{title}</p>
-            </div>
-        </Link>
+      <NavLink
+        to={link}
+        className={({ isActive }) =>
+          `text-black flex p-2 rounded-xl my-1 hover:text-purple-600 hover:bg-purple-300/20 ${
+            isActive ? "text-purple-600 bg-purple-300/20" : ""
+          }`
+        }
+      >
+        {icon}
+        <p className="ml-3">{title}</p>
+      </NavLink>
     </li>
-  )
-}
+  );
+};
 
-export default SlideList
+export default SlideList;

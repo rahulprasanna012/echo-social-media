@@ -3,7 +3,7 @@ import multer from "multer";
 const storage=multer.memoryStorage();
 
 const fileFilter=(req,file,cb)=>{
-    console.log("profl",file.mimetype);
+   
     
 
     const allowed=["image/jpeg", "image/png", "image/webp", "image/jpg", "image/gif"];

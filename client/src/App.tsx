@@ -20,7 +20,7 @@ export default function App() {
         {/* Explicit /home */}
         <Route path="home" element={<HomePage />} />
         <Route path="create" element={<CreatePage />} />
-        <Route path="profile" element={<ProfilePage />} />
+        <Route path="profile/:userId" element={<ProfilePage />} />
          <Route path="edit-profile" element={<EditProfilePage />} />
          <Route path="message" element={<MessagePage />} />
       </Route>

@@ -11,7 +11,6 @@ import Cookies from "js-cookie";
 export const signUp = async (data: SignupDTO & { profile?: File }) => {
   try {
 
-    console.log(data)
     const fd = new FormData();
 
     // append text fields
@@ -34,6 +33,7 @@ export const signUp = async (data: SignupDTO & { profile?: File }) => {
       Cookies.set("token", res.data.token, { expires: 2 });
     }
 
+    localStorage.setItem("user",JSON.stringify(res.data.user))
     return res.data;
   } catch (err) {
 
@@ -56,7 +56,7 @@ export const Login = async (data: LoginFormTypes) => {
     if (res.data.token) {
       Cookies.set("token", res.data.token, { expires: 2 });
     }
-
+    localStorage.setItem("user",JSON.stringify(res.data.user))
     return res.data;
   } catch (err) {
 

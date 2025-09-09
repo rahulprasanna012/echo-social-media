@@ -2,7 +2,7 @@ import type { ReactElement } from "react"
 
 export type ProfileTypes={
   className:string,
-  title:string
+  title?:string
 }
 
 export type BackButtonProps={

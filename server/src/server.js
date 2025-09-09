@@ -1,11 +1,12 @@
 import express from "express"
 import {config} from "@dotenvx/dotenvx"
 import { connectDB } from "./config/db.js"
-import cookieParser from "cookie-parser";
+
 import cors from'cors'
 import authRouter from "./routes/authRoute.js"
 import { cloudinaryConfiguration } from "./config/cloudinary.js"
 import { postRouter } from "./routes/postRoute.js";
+import { userRouter } from "./routes/userRoute.js"
 
 config()
 
@@ -18,12 +19,13 @@ app.use(
 );
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
 
 app.get("/api/health", (req,res) => res.send("OK"));
 
 app.use("/api/auth",authRouter)
-app.use("/api/post",postRouter)
+app.use("/api/posts",postRouter)
+app.use("/api/users",userRouter)
 
 
 

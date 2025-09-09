@@ -31,11 +31,15 @@ export const createUser = async (req, res) => {
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-    const datauri=toDataUri(req.file)
+    let imageUrl;
+    if (req.file)
+    {const datauri=toDataUri(req.file)
     
     const {secure_url}=await cloudinary.uploader.upload(datauri,{
       folder:"echo-hub/profile"
     })
+    imageUrl=secure_url
+  }
     
     
     
@@ -48,7 +52,7 @@ export const createUser = async (req, res) => {
       password: hashedPassword,
       email,
       bio,
-      profile:secure_url
+      profile:imageUrl
   
     });
  
@@ -69,8 +73,6 @@ export const LoginUser = async (req, res) => {
   try {
     
     const {indentifires, password } = req.body;
-
-    console.log(indentifires)
 
     
     if (!indentifires || !password) {
@@ -175,3 +177,4 @@ export const updateUser = async (req, res) => {
     res.status(500).json({ error: "Registration failed" });
   }
 };
+

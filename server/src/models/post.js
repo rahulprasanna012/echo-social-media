@@ -34,6 +34,7 @@ const postSchema = new mongoose.Schema(
         createdAt: { type: Date, default: Date.now },
       },
     ],
+    shareCount: { type: Number, default: 0 },
   },
   { timestamps: true } 
 );
