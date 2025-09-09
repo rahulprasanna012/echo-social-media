@@ -11,12 +11,16 @@ import { userRouter } from "./routes/userRoute.js"
 config()
 
 const app = express()
+const allowedOrigins = [process.env.ORIGIN];
+
 app.use(
   cors({
-    origin:"http://localhost:5173",
-    credentials: true, 
+    origin: allowedOrigins,
+    credentials: true,
   })
 );
+console.log(process.env.ORIGIN);
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 

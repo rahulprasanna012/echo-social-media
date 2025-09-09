@@ -15,3 +15,9 @@ export const followUser = async (userId: string) => {
 export const unfollowUser = async (userId: string) => {
   return api.post(`/users/${userId}/unfollow`);
 };
+
+export const getUserProfile = async (userId: string) => {
+ 
+  const { data } = await api.get(`/users/${userId}/profile`);
+  return data.user;
+};

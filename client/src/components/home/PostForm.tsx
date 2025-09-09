@@ -1,4 +1,4 @@
-import  { use, useState, type ChangeEvent, type FormEvent } from "react";
+import  {  useState, type ChangeEvent, type FormEvent } from "react";
 import ProfileIcon from "../ProfileIcon";
 import { Image, X } from "lucide-react";
 import { useUser } from "@/context/UserContext.tsx";
@@ -12,7 +12,7 @@ const PostForm = () => {
   const [content,setContent]=useState("")
   const [label,setLabel]=useState("")
 
-  const {user,loading,handleLoading,handleError}=useUser();
+  const {user,loading,handleLoading}=useUser();
 
 
   const uploadImage = (e: ChangeEvent<HTMLInputElement>) => {

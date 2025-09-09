@@ -5,7 +5,6 @@ import ProfilePage from "./pages/ProfilePage";
 import CreatePage from "./pages/CreatePage";
 import EditProfilePage from "./pages/EditProfilePage";
 import MessagePage from "./pages/MessagePage";
-import LoginForm from "./components/auth/LoginForm";
 import AuthPage from "./pages/AuthPage";
 
 export default function App() {

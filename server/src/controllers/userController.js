@@ -1,4 +1,6 @@
+import mongoose from "mongoose";
 import User from "../models/user.js";
+import Post from "../models/post.js";
 
 
 
@@ -18,6 +20,7 @@ export const getMe = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 
 
@@ -50,4 +53,39 @@ export const unfollowUser = async (req, res) => {
   await User.findByIdAndUpdate(targetId, { $pull: { followers: userId } });
 
   return res.status(200).json({ ok: true });
+};
+
+
+
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (!mongoose.isValidObjectId(userId)) {
+      return res.status(400).json({ error: "Invalid userId" });
+    }
+
+    const user = await User.findById(userId)
+      .select("_id name username email profile cover_image followers following createdAt");
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    const postsCount = await Post.countDocuments({ author: userId });
+
+    return res.status(200).json({
+      user: {
+        _id: user._id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        profile: user.profile,
+        cover_image: user.cover_image,
+        followers: user.followers,
+        following: user.following,
+        createdAt: user.createdAt,
+        postsCount,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({ error: "Internal Server Error: " + err.message });
+  }
 };

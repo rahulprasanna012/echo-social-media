@@ -6,6 +6,7 @@ type UploadImageProps={
     image?:ReactElement,
     title:string,
     classAdd?:string|undefined
+
 }
 const UploadImage:React.FC<UploadImageProps> = ({id,image,title,classAdd }) => {
   return (

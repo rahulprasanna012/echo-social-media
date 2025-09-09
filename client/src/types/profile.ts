@@ -15,7 +15,7 @@ export type InputTypes={
     title:string,
     type:string,
     placeholder:string,
-    onChange:()=>void,
+    onChange:(e:any)=>void,
     value:string
 
 }
@@ -26,4 +26,5 @@ export type PrimaryButtonTypes ={
     style:string,
     type:"submit" | "reset" | "button" | undefined,
     onClick:()=>void
+    disabled?:boolean
 }

@@ -68,3 +68,12 @@ export const Login = async (data: LoginFormTypes) => {
   }
 };
 
+
+export const updateMe = async (formData: FormData) => {
+  const { data } = await api.patch(
+    "/auth/update",
+    formData,
+    { headers: { "Content-Type": "multipart/form-data" } }
+  );
+  return data;
+};

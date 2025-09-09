@@ -69,7 +69,9 @@ useEffect(() => {
     [errors, handleError, handleUser, user, handleLoading, loading]
   );
 
- 
+  // Debug
+  // console.log("ctx user:", user);
+
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
