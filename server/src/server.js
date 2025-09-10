@@ -14,19 +14,11 @@ const app = express();
 const ALLOWED_ORIGIN = process.env.ORIGIN || "https://social.prasannanxtwave.site";
 
 app.use(cors({
-  origin: ALLOWED_ORIGIN,
-  credentials: true,
-  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization"],
+  origin: [ALLOWED_ORIGIN],
+  credentials: true
 }));
 
-// Express 5: use "(.*)" instead of "*"
-app.options("(.*)", cors({
-  origin: ALLOWED_ORIGIN,
-  credentials: true,
-  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type","Authorization"],
-}));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
