@@ -14,12 +14,12 @@ config();
 
 const app = express();
 
-const ALLOWED_ORIGIN = process.env.ORIGIN || "http://localhost:5173";
+const ALLOWED_ORIGIN = process.env.ORIGIN || "https://social.prasannanxtwave.site";
 
 // Express CORS
 app.use(
   cors({
-    origin: ALLOWED_ORIGIN,
+    origin:[ALLOWED_ORIGIN],
     credentials: true,
   })
 );
@@ -46,10 +46,10 @@ export const io = new Server(server, {
     origin: ALLOWED_ORIGIN,
     credentials: true,
   },
-  // path: "/socket.io", // default; set explicitly if you ever change it
+
 });
 
-export const userSocketMap= {}; // { userId: socketId }
+export const userSocketMap= {}; 
 
 io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId ;
