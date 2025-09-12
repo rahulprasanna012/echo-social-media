@@ -1,9 +1,10 @@
 import type { MessageType } from "@/assets/chat-app-assets/assets";
+import type { ChatMessage } from "@/context/ChatContext.tsx";
 import React, { useEffect, useRef } from "react";
 
 const ChatBox: React.FC<{
-  currentUserId: string;
-  messages: MessageType[];
+  currentUserId: string|undefined;
+  messages: ChatMessage[];
 }> = ({ currentUserId, messages }) => {
   const endRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,13 +27,13 @@ const ChatBox: React.FC<{
               }`}
             >
               {msg.text && <p className="text-sm">{msg.text}</p>}
-              {msg.image && (
+              {/* {msg.image && (
                 <img
                   src={msg.image}
                   alt="sent content"
                   className="rounded-md max-w-full mt-1"
                 />
-              )}
+              )} */}
               <p className={`text-[10px] mt-1 opacity-70 text-right`}>
                 {new Date(msg.createdAt).toLocaleTimeString([], {
                   hour: "2-digit",

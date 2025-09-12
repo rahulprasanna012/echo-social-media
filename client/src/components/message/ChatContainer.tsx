@@ -2,13 +2,35 @@ import ProfileBar from './ProfileBar'
 import { useRedirect } from '@/hooks/useRedirect'
 import message from '../../assets/message.svg'
 import ChatBox from './ChatBox'
-import { messagesDummyData } from '@/assets/chat-app-assets/assets'
+
 import InputBox from './InputBox'
 import { useChat } from '@/context/ChatContext.tsx'
+import { useEffect } from 'react'
+import { useUser } from '@/context/UserContext.tsx'
 const ChatContainer = () => {
 
-  const {selectedUser,setSelectedUser}=useChat()
+  const {selectedUser,setSelectedUser,messages,getMessages}=useChat()
+  const {user}=useUser()
   const {redirect}=useRedirect();
+
+  
+
+
+  useEffect(()=>{
+    
+    if (selectedUser){
+
+    getMessages(selectedUser?._id)
+   
+      
+  }
+
+
+  },[selectedUser])
+  
+
+  console.log("message",messages);
+  
 
   const onBack=()=>{
     setSelectedUser(null)
@@ -42,14 +64,14 @@ const ChatContainer = () => {
       <div className="flex-1 overflow-y-auto scrollbar-hide bg-gray-50">
         <ChatBox
         
-          currentUserId="680f5116f10f3cd28382ed02"
-          messages={messagesDummyData}
+          currentUserId={user?._id}
+          messages={messages}
         />
       </div>
 
       {/* Fixed input */}
       <div className="flex-shrink-0  bg-white">
-        <InputBox onSend={()=>{}}   />
+        <InputBox  />
       </div>
     </main>
   )

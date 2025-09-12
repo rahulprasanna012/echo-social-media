@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Send } from "lucide-react";
+import { useChat } from "@/context/ChatContext.tsx";
 
-type InputBoxProps = {
-  onSend: (text: string) => void;
-  disabled?: boolean;
-};
 
-const InputBox: React.FC<InputBoxProps> = ({ onSend, disabled = false }) => {
-  const [value, setValue] = useState("");
+
+const InputBox: React.FC = () => {
+  const [value, setValue] = useState<string>("");
+      const {sendMessage} =useChat()
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   // auto-resize textarea
@@ -21,7 +20,7 @@ const InputBox: React.FC<InputBoxProps> = ({ onSend, disabled = false }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (disabled || !value.trim()) return;
-    onSend(value.trim());
+    sendMessage({text:value.trim()});
     setValue("");
   };
 

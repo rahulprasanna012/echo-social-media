@@ -23,11 +23,11 @@ type UserLite = {
   profile?: string;
 };
 
-type ChatMessage = {
+export type ChatMessage = {
   _id: string;
   senderId: string;
   receiverId: string;
-  text?: string;
+  text: string;
   mediaUrl?: string;
   createdAt: string;
   seen?: boolean;
@@ -61,14 +61,18 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const refreshUsers = useCallback(async () => {
     const res = await getSideBarUsers(); // expects { users, unseenMessages }
     setUsers(res.users as UserLite[]);
-    setUnseen(res.unseenMessages as UnseenMap);
+    
+    setUnseen(res.unseenMessage as UnseenMap);
   }, []);
 
   // Fetch conversation messages with a user
   const getMessages = useCallback(async (userId: string) => {
     const res = await getMessage(userId); // expects ChatMessage[]
-    setMessages(res as ChatMessage[]);
-    // Since we just opened the thread, clear unseen counter for that user
+   
+    setMessages(res.message as ChatMessage[]);
+
+
+
     setUnseen((prev) => {
       if (!prev[userId]) return prev;
       const next = { ...prev };
