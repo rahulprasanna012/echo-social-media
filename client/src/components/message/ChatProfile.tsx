@@ -3,7 +3,7 @@ import React from "react";
 type ChatProfileTypes = {
   id: string;
   name: string;
-  profile: string;
+  profile: string|undefined;
   userSelected: string;
   getSelectedUser: (id: string) => void;
   unreadCount?: number;

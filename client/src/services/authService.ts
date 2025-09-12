@@ -1,10 +1,13 @@
 
+import { useUser } from "@/context/UserContext.tsx";
 import type {LoginFormTypes, SignupDTO } from "@/types/auth";
 import api from "@/utils/api.ts";
 import axios from "axios";
 
 
 import Cookies from "js-cookie";
+
+
  
 
 
@@ -32,7 +35,7 @@ export const signUp = async (data: SignupDTO & { profile?: File }) => {
     if (res.data.token) {
       Cookies.set("token", res.data.token, { expires: 2 });
     }
-
+    
     localStorage.setItem("user",JSON.stringify(res.data.user))
     return res.data;
   } catch (err) {

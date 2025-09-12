@@ -9,12 +9,13 @@ import { useUser } from "@/context/UserContext";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { user, handleUser } = useUser(); // so we can clear on logout
+  const { user, handleUser,socket } = useUser(); // so we can clear on logout
 
   const loggedOut = () => {
     Cookies.remove("token");
     localStorage.removeItem("token");   // if you also store it here
-    handleUser(null);                   // clear context user
+    handleUser(null);   
+    socket.disconnect();                // clear context user
     navigate("/login", { replace: true });
   };
 

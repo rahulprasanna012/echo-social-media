@@ -3,16 +3,12 @@ import api from "@/utils/api.ts";
 import axios from "axios";
 
 
-export const createPost=async (data:PostFormTypes)=>{
+export const createPost=async (data:any)=>{
 
     try{
-        const formData= new FormData()
+        
 
-        formData.append("content",data.content);
-        formData.append("label",data.label)
-        if (data.file) formData.append("image",data.file)
-
-        const res= await api.post("posts",formData,{
+        const res= await api.post("posts",data,{
       headers: { "Content-Type": "multipart/form-data" }, 
     })
 

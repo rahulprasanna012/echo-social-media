@@ -5,6 +5,7 @@ import { useState } from 'react'
 const MessageSection = () => {
   const [userSelected, setUserSelected] = useState<string>("")
 
+  
   return (
     <div className="w-full grid grid-cols-6 h-screen overflow-hidden">
       {/* List (full width on mobile until a user is selected; fixed column on desktop) */}

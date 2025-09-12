@@ -4,6 +4,8 @@ import React, {
   createContext, useContext, useState, useMemo, useCallback, useEffect, type ReactNode
 } from "react";
 
+import {io} from "socket.io-client"
+
 type UserTypes = {
   name: string;
   email: string;
@@ -23,6 +25,9 @@ type ContextValueTypes = {
   user: UserTypes | null;
   handleLoading: (state: boolean) => void;
   loading: boolean;
+  connectSocket:any;
+  socket:any;
+  onlineUser:any
 };
 
 const UserContext = createContext<ContextValueTypes | undefined>(undefined);
@@ -40,11 +45,35 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const [errors, setErrors] = useState("");
   const [loading, setLoading] = useState(false);
+  const [onlineUser,setOnlineUser]=useState([])
+  const [socket,setSocket]=useState<any>(null)
+
+  const backendUrl=import.meta.env.VITE_BASE_SOCKET
+
+  const connectSocket=(userData:any)=>{
+
+    if(!userData || socket?.connected) return;
+    const newSocket=io(backendUrl,{
+      query:{
+        userId:userData._id,
+        withCredentials: true,
+        
+      }
+    })
+    newSocket.connect()
+    setSocket(newSocket)
+    newSocket.on("getOnlineUsers",(userIds)=>{
+
+      setOnlineUser(userIds)
+    })
+  }
+
 
 useEffect(() => {
   const init = async () => {
     try {
       const freshUser = await getMe();
+      connectSocket(user)
       setUser(freshUser);
     } catch {
       setUser(null);
@@ -65,8 +94,11 @@ useEffect(() => {
       user,
       handleLoading,
       loading,
+      socket,
+      connectSocket,
+      onlineUser
     }),
-    [errors, handleError, handleUser, user, handleLoading, loading]
+    [errors, handleError, handleUser,onlineUser, user, handleLoading, loading]
   );
 
   // Debug

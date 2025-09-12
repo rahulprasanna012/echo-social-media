@@ -1,10 +1,33 @@
 import SecondaryButton from '../SecondaryButton'
 import { PlusIcon, Search } from 'lucide-react'
-import { userDummyData } from '@/assets/chat-app-assets/assets'
 import ChatProfile from './ChatProfile'
+import { useChat } from '@/context/ChatContext.tsx'
+import { useUser } from '@/context/UserContext.tsx'
+import { useEffect } from 'react'
+
+
 
 const ChatList = ({ setUserSelected, userSelected }: any) => {
-  const getSelectedUser = (id: string) => setUserSelected(id)
+
+  const {users,refreshUsers}=useChat()
+
+  const {onlineUser}=useUser()
+
+  console.log("all user:",users);
+  console.log("online user",onlineUser);
+
+  useEffect(()=>{
+
+
+    refreshUsers()
+
+
+  },[onlineUser,refreshUsers])
+
+
+
+  
+  
 
   return (
     <section className="bg-white h-full w-full max-w-full md:max-w-[360px] shadow flex flex-col">
@@ -32,13 +55,13 @@ const ChatList = ({ setUserSelected, userSelected }: any) => {
 
       {/* Scroll area */}
       <div className="flex-1 overflow-y-auto scrollbar-hide min-h-0">
-        {userDummyData?.map((profile) => (
+        {users?.map((profile) => (
           <ChatProfile
-            name={profile.fullName}
+            name={profile.name}
             key={profile._id}
-            profile={profile.profilePic}
+            profile={profile?.profile}
             id={profile._id}
-            getSelectedUser={getSelectedUser}
+            getSelectedUser={()=>{}}
             userSelected={userSelected}
           />
         ))}

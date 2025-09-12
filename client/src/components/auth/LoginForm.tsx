@@ -12,7 +12,7 @@ const LoginForm: React.FC = () => {
   const [login, setLogin] = useState<LoginFormTypes>({ indentifires: "", password: "" });
 
 
-  const {errors,handleError,handleUser,handleLoading,loading}=useUser()
+  const {errors,handleError,handleUser,handleLoading,loading,connectSocket}=useUser()
   const { redirect } = useRedirect();
 
   function getInput(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -54,6 +54,7 @@ const LoginForm: React.FC = () => {
 
     try{
         const res= await Login(login)
+        connectSocket(res.user)
         redirect("/")
         handleUser(res.user)
         handleError("")

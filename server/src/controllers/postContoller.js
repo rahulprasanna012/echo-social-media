@@ -25,7 +25,7 @@ export const createPost = async (req, res) => {
     
     const response = await Post.create({
       content,
-      label:label.split(" "),
+      label:label?.split(" "),
       author: id,
       image: imageUrl,
     });
