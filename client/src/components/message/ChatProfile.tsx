@@ -4,7 +4,7 @@ type ChatProfileTypes = {
   id: string;
   name: string;
   profile: string|undefined;
-  userSelected: string;
+  userSelected?: string;
   getSelectedUser: (id: string) => void;
   unreadCount?: number;
   status?: "online" | "offline";
@@ -20,6 +20,8 @@ const ChatProfile: React.FC<ChatProfileTypes> = ({
   status = "offline",
 }) => {
   const isSelected = id === userSelected;
+
+  
 
   return (
     <button

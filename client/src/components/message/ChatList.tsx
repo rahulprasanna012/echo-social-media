@@ -7,9 +7,9 @@ import { useEffect } from 'react'
 
 
 
-const ChatList = ({ setUserSelected, userSelected }: any) => {
+const ChatList = () => {
 
-  const {users,refreshUsers}=useChat()
+  const {users,refreshUsers,selectedUser,setSelectedUser}=useChat()
 
   const {onlineUser}=useUser()
 
@@ -23,6 +23,15 @@ const ChatList = ({ setUserSelected, userSelected }: any) => {
 
 
   },[onlineUser,refreshUsers])
+
+
+const getSelectedUser=(id: string)=>{
+
+    const u=users.find((item)=>(item._id===id))||null 
+    setSelectedUser(u)
+    
+
+}
 
 
 
@@ -61,8 +70,8 @@ const ChatList = ({ setUserSelected, userSelected }: any) => {
             key={profile._id}
             profile={profile?.profile}
             id={profile._id}
-            getSelectedUser={()=>{}}
-            userSelected={userSelected}
+            getSelectedUser={getSelectedUser}
+            userSelected={selectedUser?._id}
           />
         ))}
       </div>
