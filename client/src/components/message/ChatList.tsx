@@ -9,12 +9,13 @@ import { useEffect } from 'react'
 
 const ChatList = () => {
 
-  const {users,refreshUsers,selectedUser,setSelectedUser}=useChat()
+  const {users,refreshUsers,selectedUser,setSelectedUser,unseen,}=useChat()
+  const unseenMap=unseen??{}
 
   const {onlineUser}=useUser()
 
   console.log("all user:",users);
-  console.log("online user",onlineUser);
+  console.log("online user",unseen);
 
   useEffect(()=>{
 
@@ -66,10 +67,12 @@ const getSelectedUser=(id: string)=>{
       <div className="flex-1 overflow-y-auto scrollbar-hide min-h-0">
         {users?.map((profile) => (
           <ChatProfile
-            name={profile.name}
+            username={profile.username}
             key={profile._id}
             profile={profile?.profile}
             id={profile._id}
+            status={onlineUser.includes(profile._id)?"online":"offline"}
+            unreadCount={unseenMap[profile._id]}
             getSelectedUser={getSelectedUser}
             userSelected={selectedUser?._id}
           />

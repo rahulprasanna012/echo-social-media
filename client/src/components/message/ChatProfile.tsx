@@ -1,8 +1,9 @@
+import ProfileIcon from "@/components/ProfileIcon.tsx";
 import React from "react";
 
 type ChatProfileTypes = {
   id: string;
-  name: string;
+  username: string;
   profile: string|undefined;
   userSelected?: string;
   getSelectedUser: (id: string) => void;
@@ -12,11 +13,11 @@ type ChatProfileTypes = {
 
 const ChatProfile: React.FC<ChatProfileTypes> = ({
   id,
-  name,
+  username,
   profile,
   userSelected,
   getSelectedUser,
-  unreadCount = 10,
+  unreadCount = 0,
   status = "offline",
 }) => {
   const isSelected = id === userSelected;
@@ -32,13 +33,16 @@ const ChatProfile: React.FC<ChatProfileTypes> = ({
       }`}
     >
       <div className="flex items-center">
-        <img
+        {
+            profile?<img
           src={profile}
-          alt={`${name} profile`}
+          alt={`${username} profile`}
           className="rounded-full size-14 border"
-        />
+        />:          <ProfileIcon className="rounded-full size-14 mr-2" title={username[0]} />
+
+        }
         <div className="ml-3 text-left">
-          <p className="font-semibold">{name}</p>
+          <p className="font-semibold">{username}</p>
           <p
             className={`text-sm ${
               status === "online" ? "text-green-600" : "text-gray-400"
