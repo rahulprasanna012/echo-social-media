@@ -16,7 +16,7 @@ const FeedCommentsList: React.FC<FeedCommentsListProps> = ({ comment }) => {
       {comment.user.profile ? (
         <img src={comment.user.profile} alt={comment.user.username} className="rounded-3xl size-10 mr-2" />
       ) : (
-        <ProfileIcon className="rounded-3xl size-10 mr-2" title={initial} />
+        <ProfileIcon className="rounded-3xl size-10 mr-2" title={initial.toUpperCase()} />
       )}
 
       <div>

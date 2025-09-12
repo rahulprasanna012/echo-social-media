@@ -38,7 +38,7 @@ const ChatProfile: React.FC<ChatProfileTypes> = ({
           src={profile}
           alt={`${username} profile`}
           className="rounded-full size-14 border"
-        />:          <ProfileIcon className="rounded-full size-14 mr-2" title={username[0]} />
+        />:          <ProfileIcon className="rounded-full size-14 mr-2" title={username[0].toUpperCase()} />
 
         }
         <div className="ml-3 text-left">

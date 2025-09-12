@@ -4,16 +4,18 @@ import message from '../../assets/message.svg'
 import ChatBox from './ChatBox'
 import { messagesDummyData } from '@/assets/chat-app-assets/assets'
 import InputBox from './InputBox'
-const ChatContainer = ({setUserSelected,userSelected}:any) => {
+import { useChat } from '@/context/ChatContext.tsx'
+const ChatContainer = () => {
 
+  const {selectedUser,setSelectedUser}=useChat()
   const {redirect}=useRedirect();
 
   const onBack=()=>{
-    setUserSelected("")
+    setSelectedUser(null)
     redirect("/")
   }
 
-  if (!userSelected) {
+  if (!selectedUser) {
     return (
       <main className="h-screen flex items-center justify-center text-gray-500">
         <div className='flex flex-col items-center '>
@@ -33,7 +35,7 @@ const ChatContainer = ({setUserSelected,userSelected}:any) => {
     <main className="h-screen flex flex-col bg-white">
       {/* Top bar */}
       <div className="flex-shrink-0  bg-white">
-        <ProfileBar u onBack={onBack} />
+        <ProfileBar onBack={onBack} />
       </div>
 
       {/* Scrollable messages */}

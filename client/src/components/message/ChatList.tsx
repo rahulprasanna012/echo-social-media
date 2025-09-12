@@ -1,43 +1,25 @@
-import SecondaryButton from '../SecondaryButton'
-import { PlusIcon, Search } from 'lucide-react'
-import ChatProfile from './ChatProfile'
-import { useChat } from '@/context/ChatContext.tsx'
-import { useUser } from '@/context/UserContext.tsx'
-import { useEffect } from 'react'
-
-
+import SecondaryButton from "../SecondaryButton";
+import { PlusIcon, Search } from "lucide-react";
+import ChatProfile from "./ChatProfile";
+import { useChat } from "@/context/ChatContext.tsx";
+import { useUser } from "@/context/UserContext.tsx";
+import { useEffect } from "react";
 
 const ChatList = () => {
+  const { users, refreshUsers, selectedUser, setSelectedUser, unseen } =
+    useChat();
+  const unseenMap = unseen ?? {};
 
-  const {users,refreshUsers,selectedUser,setSelectedUser,unseen,}=useChat()
-  const unseenMap=unseen??{}
+  const { onlineUser } = useUser();
 
-  const {onlineUser}=useUser()
+  useEffect(() => {
+    refreshUsers();
+  }, [onlineUser, refreshUsers]);
 
-  console.log("all user:",users);
-  console.log("online user",unseen);
-
-  useEffect(()=>{
-
-
-    refreshUsers()
-
-
-  },[onlineUser,refreshUsers])
-
-
-const getSelectedUser=(id: string)=>{
-
-    const u=users.find((item)=>(item._id===id))||null 
-    setSelectedUser(u)
-    
-
-}
-
-
-
-  
-  
+  const getSelectedUser = (id: string) => {
+    const u = users.find((item) => item._id === id) || null;
+    setSelectedUser(u);
+  };
 
   return (
     <section className="bg-white h-full w-full max-w-full md:max-w-[360px] shadow flex flex-col">
@@ -71,7 +53,7 @@ const getSelectedUser=(id: string)=>{
             key={profile._id}
             profile={profile?.profile}
             id={profile._id}
-            status={onlineUser.includes(profile._id)?"online":"offline"}
+            status={onlineUser.includes(profile._id) ? "online" : "offline"}
             unreadCount={unseenMap[profile._id]}
             getSelectedUser={getSelectedUser}
             userSelected={selectedUser?._id}
@@ -79,7 +61,7 @@ const getSelectedUser=(id: string)=>{
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ChatList
+export default ChatList;

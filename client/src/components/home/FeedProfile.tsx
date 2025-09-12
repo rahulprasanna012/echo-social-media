@@ -43,7 +43,7 @@ const FeedProfile: FC<FeedProfileProps> = ({ author, date }) => {
             className="rounded-3xl size-12 mr-2"
           />
         ) : (
-          <ProfileIcon className="rounded-3xl size-12 mr-2" title={author.username[0]} />
+          <ProfileIcon className="rounded-3xl size-12 mr-2" title={author.username[0].toUpperCase()} />
         )}
 
         <div>

@@ -29,7 +29,7 @@ const Sidebar = () => {
   ];
 
   const displayName = user?.name || "User";
-  const initial = user?.name?.[0] ?? "U";
+  const initial = user?.name?.[0].toUpperCase() ?? "U";
 
   return (
     <section className="bg-purple-50/70 h-full w-72 flex flex-col justify-evenly">

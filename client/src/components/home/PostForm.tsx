@@ -80,7 +80,7 @@ const PostForm = () => {
   };
 
   const avatar = user?.profile;
-  const initial = user?.name?.[0] ?? "?";
+  const initial = user?.name?.[0].toUpperCase() ?? "?";
 
   return (
     <form className="bg-white p-6 rounded-lg" onSubmit={handleSubmit}>
