@@ -19,7 +19,7 @@ const InputBox: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (disabled || !value.trim()) return;
+    if ( !value.trim()) return;
     sendMessage({text:value.trim()});
     setValue("");
   };
@@ -42,15 +42,14 @@ const InputBox: React.FC = () => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder={
-          disabled ? "Select a conversation to start…" : "Type a message…"
-        }
-        disabled={disabled}
+        placeholder="Select a conversation to start…" 
+        
+     
         className="flex-1 resize-none overflow-hidden rounded-md border px-3 py-2 outline-none disabled:bg-gray-100"
       />
       <button
         type="submit"
-        disabled={disabled || !value.trim()}
+  
         className="p-2 rounded-md bg-purple-600 text-white disabled:opacity-50"
         aria-label="Send message"
       >

@@ -23,7 +23,6 @@ const ProfileSection = () => {
     const load = async () => {
     
       try {
-          console.log("hi");
         const u = await getUserProfile(userId!);
         if (!cancelled) setProfile(u);
       } catch {

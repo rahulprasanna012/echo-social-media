@@ -1,5 +1,4 @@
 
-import { useUser } from "@/context/UserContext.tsx";
 import type {LoginFormTypes, SignupDTO } from "@/types/auth";
 import api from "@/utils/api.ts";
 import axios from "axios";

@@ -6,7 +6,7 @@ import {
   seenMessage,
   sendMessage as sendMessageAPI,
 } from "@/services/messageService.ts";
-import React, {
+import  {
   createContext,
   useContext,
   useEffect,
@@ -86,7 +86,9 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     async (payload: { text?: string; media?: File | null }) => {
       if (!selectedUser) return;
       const res = await sendMessageAPI(selectedUser._id, payload);
-      setMessages((prev) => [...prev, res as ChatMessage]);
+    
+      
+      setMessages((prev) => [...prev, res.newMessage as ChatMessage]);
     },
     [selectedUser]
   );

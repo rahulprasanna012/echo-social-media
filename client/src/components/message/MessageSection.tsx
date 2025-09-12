@@ -3,7 +3,7 @@ import ChatContainer from './ChatContainer'
 import { useState } from 'react'
 
 const MessageSection = () => {
-  const [userSelected, setUserSelected] = useState<string>("")
+  const [userSelected] = useState<string>("")
 
   
   return (
@@ -12,14 +12,14 @@ const MessageSection = () => {
       <aside
         className={`${userSelected ? "hidden" : "block"} md:block col-span-6 md:col-span-2 min-h-0`}
       >
-        <ChatList setUserSelected={setUserSelected} userSelected={userSelected} />
+        <ChatList  />
       </aside>
 
       {/* Chat (hidden on mobile until a user is selected; always visible on desktop) */}
       <section
         className={`${userSelected ? "block" : "hidden"} md:block col-span-6 md:col-span-4 min-h-0`}
       >
-        <ChatContainer setUserSelected={setUserSelected} userSelected={userSelected}/>
+        <ChatContainer />
       </section>
     </div>
   )

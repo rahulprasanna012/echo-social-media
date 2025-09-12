@@ -1,4 +1,3 @@
-import type { PostFormTypes } from "@/types/post.ts";
 import api from "@/utils/api.ts";
 import axios from "axios";
 

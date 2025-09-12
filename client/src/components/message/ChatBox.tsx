@@ -1,4 +1,3 @@
-import type { MessageType } from "@/assets/chat-app-assets/assets";
 import type { ChatMessage } from "@/context/ChatContext.tsx";
 import React, { useEffect, useRef } from "react";
 
