@@ -14,7 +14,7 @@ config();
 
 const app = express();
 
-const ALLOWED_ORIGIN = process.env.ORIGIN || "https://social.prasannanxtwave.site";
+const ALLOWED_ORIGIN = process.env.ORIGIN || "http://localhost:5173";
 
 // Express CORS
 app.use(
